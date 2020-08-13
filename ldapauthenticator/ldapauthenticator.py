@@ -304,6 +304,16 @@ class LDAPAuthenticator(Authenticator):
 
         return (user_dn, response[0]["dn"])
 
+    def normalize_username(self, username):
+        """Normalize the given username and return it
+
+        Override in subclasses if usernames need different normalization rules.
+
+        The default attempts to lowercase the username and apply `username_map` if it is
+        set.
+        """
+        return username
+
     def get_connection(self, userdn, password):
         server = ldap3.Server(
             self.server_address, port=self.server_port, use_ssl=self.use_ssl
