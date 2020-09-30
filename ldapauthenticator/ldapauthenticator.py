@@ -314,13 +314,6 @@ class LDAPAuthenticator(Authenticator):
         The default attempts to lowercase the username and apply `username_map` if it is
         set.
         """
-        def user_exists(name):
-            import subprocess
-            return subprocess.call(["id", name])==0
-
-        if not user_exists(username):
-            return "bluedata"
-
         return username
 
     def get_connection(self, userdn, password):
